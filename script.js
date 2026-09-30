@@ -1,4 +1,4 @@
-const USER_REPO = "GafolagBazor/gbjfx-clicker";
+const USER_REPO = "/GafolagBazor/gbjfx-clicker";
 
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -46,9 +46,11 @@ async function loadGitHubData() {
         }
     } catch (error) {
         document.getElementById('latest-version').innerText = "v1.4";
-        document.getElementById('nav-download-btn').innerText = "Скачать v1.4";
-        document.getElementById('hero-download-btn').href = "https://github.com" + USER_REPO + "/releases/download/gbjfx-clicker-v1.4/GafBazClickerSetup-1.4.exe";
+        document.getElementById('nav-download-btn').innerText = "Скачать";
+        document.getElementById('hero-download-btn').href = "https://github.com" + USER_REPO + "/releases/latest";
+        document.getElementById('hero-download-btn').innerText = "Перейти к последнему релизу";
     }
+
 }
 
 window.addEventListener('DOMContentLoaded', loadGitHubData);
