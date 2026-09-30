@@ -1,4 +1,4 @@
-const REPO = "GafolagBazor/gbjfx-clicker";
+const USER_REPO = "GafolagBazor/gbjfx-clicker";
 
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
@@ -14,132 +14,40 @@ document.querySelectorAll('nav a').forEach(anchor => {
     });
 });
 
-function parseReleaseBody(bodyText) {
+function injectDefaultData() {
     const featuresGrid = document.getElementById('features-grid');
     const achievementsList = document.getElementById('achievements-list');
     
-    featuresGrid.innerHTML = '';
-    achievementsList.innerHTML = '';
+    featuresGrid.innerHTML = '<div class="card"><h3>Модульный бэкенд</h3><p>Полное разделение логики на Java-модули: JSON, ClickLogger, JSconnect и WebViewManager.</p></div>' +
+        '<div class="card"><h3>10-сек Таймер</h3><p>Умная система аварийного восстановления сессии и уровней прокачки при старте.</p></div>' +
+        '<div class="card"><h3>Трёхфайловая база</h3><p>Изолированное хранение кликов, множителей и пассивного дохода в независимых JSON.</p></div>';
 
-    const lines = bodyText.split('\n');
-    let currentSection = '';
-
-    const icons = ['🧱', '⏱️', '📂', '🚀', '🔮', '⚙️'];
-    let featureCount = 0;
-
-    lines.forEach(line => {
-        const trimmed = line.trim();
-        if (!trimmed) return;
-
-        if (trimmed.includes('### 📂') || trimmed.includes('### 🧱') || trimmed.includes('Разделение') || trimmed.includes('База')) {
-            currentSection = 'features';
-            return;
-        }
-        if (trimmed.includes('### ⏱️') || trimmed.includes('Восстановление') || trimmed.includes('Таймер')) {
-            currentSection = 'features';
-            return;
-        }
-        if (trimmed.includes('### 🥇') || trimmed.includes('Сортировка') || trimmed.includes('Чемпион')) {
-            currentSection = 'features';
-            return;
-        }
-        if (trimmed.includes('### 🎮') || trimmed.includes('Достижения') || trimmed.includes('Ачивки')) {
-            currentSection = 'achievements';
-            return;
-        }
-
-        if (trimmed.startsWith('*') || trimmed.startsWith('-')) {
-            const content = trimmed.substring(1).trim();
-            const parts = content.split('—');
-            
-            if (parts.length >= 2) {
-                const title = parts[0].replace(/`|\*/g, '').trim();
-                const desc = parts.slice(1).join('—').trim();
-
-                if (currentSection === 'features') {
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    
-                    const iconDiv = document.createElement('div');
-                    iconDiv.className = 'card-icon';
-                    iconDiv.innerText = icons[featureCount % icons.length];
-                    featureCount++;
-
-                    const h3 = document.createElement('h3');
-                    h3.innerText = title;
-
-                    const p = document.createElement('p');
-                    p.innerText = desc;
-
-                    card.appendChild(iconDiv);
-                    card.appendChild(h3);
-                    card.appendChild(p);
-                    featuresGrid.appendChild(card);
-                } 
-                else if (currentSection === 'achievements') {
-                    const item = document.createElement('div');
-                    item.className = 'ach-item';
-
-                    const badge = document.createElement('div');
-                    badge.className = 'ach-badge';
-                    badge.innerText = title.toLowerCase().includes('хацкер') ? '🕵️‍♂️' : '🏆';
-                    if (title.toLowerCase().includes('хацкер')) {
-                        badge.style.color = '#ef4444';
-                        badge.style.borderColor = '#ef4444';
-                    }
-
-                    const info = document.createElement('div');
-                    info.className = 'ach-info';
-
-                    const h4 = document.createElement('h4');
-                    h4.innerText = title;
-
-                    const p = document.createElement('p');
-                    p.innerText = desc;
-
-                    info.appendChild(h4);
-                    info.appendChild(p);
-                    item.appendChild(badge);
-                    item.appendChild(info);
-                    achievementsList.appendChild(item);
-                }
-            }
-        }
-    });
+    achievementsList.innerHTML = '<div class="ach-item"><div class="ach-info"><h4>Первая сотня</h4><p>Накликано более 100 очков в рамках сессии.</p></div></div>' +
+        '<div class="ach-item"><div class="ach-info"><h4>Тысяч рублей?!</h4><p>Накликано более 1 000 очков на основном счету.</p></div></div>' +
+        '<div class="ach-item"><div class="ach-info"><h4>Уничтожитель лимитов</h4><p>Выход вычислений в диапазон октиллионов с BigInteger.</p></div></div>' +
+        '<div class="ach-item"><div class="ach-info"><h4>Мамкин хацкер</h4><p>Достижение критического лимита очков с фиксацией таймлайна.</p></div></div>';
 }
 
 async function loadGitHubData() {
+    injectDefaultData();
+    
     try {
-        const repoResponse = await fetch(`https://github.com{REPO}`);
-        if (repoResponse.ok) {
-            const repoData = await repoResponse.json();
-            document.getElementById('repo-stars').innerText = repoData.stargazers_count;
+        const verResponse = await fetch("https://githubusercontent.com" + USER_REPO + "/main/ver/cVer.txt");
+        if (verResponse.ok) {
+            const rawVer = await verResponse.text();
+            const cleanVer = rawVer.trim();
             
-            const rawDate = new Date(repoData.updated_at);
-            document.getElementById('last-update').innerText = rawDate.toLocaleDateString("ru-RU");
-        }
-
-        const releasesResponse = await fetch(`https://github.com{REPO}/releases/latest`);
-        if (releasesResponse.ok) {
-            const releaseData = await releasesResponse.json();
-            const tagName = releaseData.tag_name;
+            document.getElementById('latest-version').innerText = "v" + cleanVer;
+            document.getElementById('nav-download-btn').innerText = "Скачать v" + cleanVer;
             
-            document.getElementById('latest-version').innerText = tagName;
-            document.getElementById('nav-download-btn').innerText = `Скачать ${tagName}`;
-            
-            const exeAsset = releaseData.assets.find(asset => asset.name.endsWith('.exe'));
-            if (exeAsset) {
-                const heroBtn = document.getElementById('hero-download-btn');
-                heroBtn.href = exeAsset.browser_download_url;
-                heroBtn.innerText = `Скачать инсталлятор (${tagName})`;
-            }
-
-            if (releaseData.body) {
-                parseReleaseBody(releaseData.body);
-            }
+            const downloadUrl = "https://github.com" + USER_REPO + "/releases/download/gbjfx-clicker-v" + cleanVer + "/GafBazClickerSetup-" + cleanVer + ".exe";
+            document.getElementById('hero-download-btn').href = downloadUrl;
+            document.getElementById('hero-download-btn').innerText = "Скачать инсталлятор (v" + cleanVer + ")";
         }
     } catch (error) {
-        console.error("Ошибка при работе с GitHub API:", error);
+        document.getElementById('latest-version').innerText = "v1.4";
+        document.getElementById('nav-download-btn').innerText = "Скачать v1.4";
+        document.getElementById('hero-download-btn').href = "https://github.com" + USER_REPO + "/releases/download/gbjfx-clicker-v1.4/GafBazClickerSetup-1.4.exe";
     }
 }
 
