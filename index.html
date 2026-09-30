@@ -1,9 +1,55 @@
-<html>
-  <head>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GafBazJavaFX Clicker — Официальный сайт</title>
     <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">💎 GafBazClicker</div>
+            <nav>
+                <a href="#about">Об игре</a>
+                <a href="#achievements">Достижения</a>
+                <a href="#download" id="nav-download-btn" class="nav-btn">Загрузка...</a>
+            </nav>
+        </div>
+    </header>
 
+    <section class="hero">
+        <div class="container hero-container">
+            <h1 class="hero-title">GafBazJavaFX Clicker</h1>
+            <div id="repo-stats" style="margin-bottom: 30px; font-size: 15px; color: #a855f7; font-weight: bold;">
+                Версия: <span id="latest-version" style="color:#fff;">...</span> | ⭐ Звёзд: <span id="repo-stars" style="color:#fff;">...</span> | Обновлено: <span id="last-update" style="color:#fff;">...</span>
+            </div>
+            <div class="hero-actions">
+                <a href="#" id="hero-download-btn" class="btn btn-primary">Загрузка установщика...</a>
+                <a href="https://github.com" class="btn btn-secondary" target="_blank">GitHub Репозиторий</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="features">
+        <div class="container">
+            <h2 class="section-title">Технологии и Описание</h2>
+            <div id="features-grid" class="grid"></div>
+        </div>
+    </section>
+
+    <section id="achievements" class="achievements-section">
+        <div class="container">
+            <h2 class="section-title">Игровые Достижения</h2>
+            <div id="achievements-list" class="achievements-list"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <p>&copy; 2026 GafBazJavaFX. Вся информация автоматически генерируется из GitHub Releases API.</p>
+        </div>
+    </footer>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
