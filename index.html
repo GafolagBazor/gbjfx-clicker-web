@@ -12,7 +12,7 @@
             <div class="logo">GafBazClicker</div>
             <nav>
                 <a href="#about">Об игре</a>
-                <a href="#download" id="nav-download-btn" class="nav-btn">Скачать...</a>
+                <a href="#download" id="nav-download-btn" class="nav-btn">Скачать v1.4</a>
             </nav>
         </div>
     </header>
@@ -21,10 +21,10 @@
         <div class="container hero-container">
             <h1 class="hero-title">GafBazJavaFX Clicker</h1>
             <div id="repo-stats" style="margin-bottom: 30px; font-size: 15px; color: #a855f7; font-weight: bold;">
-                Версия: <span id="latest-version" style="color:#fff;">Загрузка...</span> | Обновлено: <span id="last-update" style="color:#fff;">Загрузка...</span>
+                Версия: <span id="latest-version" style="color:#fff;">v1.4</span> | Обновлено: <span id="last-update" style="color:#fff;">30.09.2026</span>
             </div>
             <div class="hero-actions">
-                <a href="#" id="hero-download-btn" class="btn btn-primary">Загрузка...</a>
+                <a href="https://github.com" id="hero-download-btn" class="btn btn-primary">Скачать инсталлятор (v1.4)</a>
                 <a href="https://github.com" class="btn btn-secondary" target="_blank">Репозиторий проекта</a>
             </div>
         </div>
@@ -33,13 +33,26 @@
     <section id="about" class="features">
         <div class="container">
             <h2 class="section-title">Технологии и Описание</h2>
-            <div id="features-grid" class="grid"></div>
+            <div id="features-grid" class="grid">
+                <div class="card">
+                    <h3>Модульный бэкенд</h3>
+                    <p>Полное разделение логики на Java-модули: JSON, ClickLogger, JSconnect и WebViewManager.</p>
+                </div>
+                <div class="card">
+                    <h3>10-сек Таймер</h3>
+                    <p>Умная система аварийного восстановления сессии и уровней прокачки при старте.</p>
+                </div>
+                <div class="card">
+                    <h3>Трёхфайловая база</h3>
+                    <p>Изолированное хранение кликов, множителей и пассивного дохода в независимых JSON.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="container footer-container">
-            <p>&copy; 2026 GafBazJavaFX. Синхронизация с сервером обновлений активна.</p>
+            <p>&copy; 2026 GafBazJavaFX. Стабильная сборка с ручным управлением.</p>
         </div>
     </footer>
     <script src="script.js"></script>
