@@ -183,39 +183,6 @@ nav a:hover {
     font-size: 15px;
 }
 
-.achievements-section {
-    padding: 100px 0;
-}
-
-.achievements-list {
-    max-width: 700px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.ach-item {
-    background: #1e1e2e;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 14px;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.ach-info h4 {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 4px;
-}
-
-.ach-info p {
-    color: #a6adc8;
-    font-size: 14px;
-}
-
 footer {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding: 40px 0;
