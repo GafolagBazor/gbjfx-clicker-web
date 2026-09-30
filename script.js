@@ -82,7 +82,7 @@ function parseCustomConfig(text) {
 
 async function loadGitHubData() {
     try {
-        const response = await fetch("https://githubusercontent.com" + USER_REPO + "/main/gbjfxcwres/res.md");
+        const response = await fetch("raw.https://githubusercontent.com" + USER_REPO + "/main/gbjfxcwres/res.md");
         if (response.ok) {
             const text = await response.text();
             parseCustomConfig(text);
